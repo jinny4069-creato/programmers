@@ -16,7 +16,7 @@
                 
                 int sum = nums[i] + nums[j] + nums[k];
                 int count = 0;
-                for (int q = 2; q < sum / 2; q++)
+                for (int q = 2; q * q <= sum; q++)
                 {
                     if (q != sum && sum % q == 0)
                         count++;
