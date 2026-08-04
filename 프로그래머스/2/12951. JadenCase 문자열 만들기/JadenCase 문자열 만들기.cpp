@@ -5,17 +5,17 @@ using namespace std;
 
 string solution(string s) {
 
-    for (int i = 0; i < s.size(); i++)
+    s[0] = toupper(s[0]);
+
+    for (int i = 1; i < s.size(); i++)
     {
-        if (s[i] >= 'a' && s[i] <= 'z')
+        if (s[i - 1] == ' ')
         {
-            if (i == 0 || s[i - 1] == ' ')
-                s[i] = s[i] - 32;
+            s[i] = toupper(s[i]);
         }
-        else if (s[i] >= 'A' && s[i] <= 'Z')
+        else if (s[i - 1] != ' ')
         {
-            if (i != 0 && s[i - 1] != ' ')
-                s[i] = s[i] + 32;
+            s[i] = tolower(s[i]);
         }
     }
 
