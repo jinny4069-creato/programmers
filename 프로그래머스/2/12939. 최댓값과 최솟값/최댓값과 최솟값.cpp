@@ -22,7 +22,7 @@ string solution(string s) {
     
     sort(nums.begin(), nums.end(), less<>());
    
-    answer = (to_string(nums[0])) + " " + to_string(nums[nums.size() - 1]);
+     answer = (to_string(nums.front())) + " " + to_string(nums.back());
 
     return answer;
 }
