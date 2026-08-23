@@ -16,12 +16,11 @@ int solution(vector<int> people, int limit) {
 
     int left = 0;
     
-
     for (int right = people.size() - 1; right >= 0; right--)
     {
-        if (board[right] == true)
-            continue;
-
+if (board[right] == true)
+    continue;
+        
         board[right] = true;
         answer++;
 
