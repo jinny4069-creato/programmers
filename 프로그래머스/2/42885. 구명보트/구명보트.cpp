@@ -11,24 +11,26 @@ using namespace std;
 int solution(vector<int> people, int limit) {
     int answer = 0;
     sort(people.begin(), people.end(), less<>());
-    vector<bool> board;
-    board.resize(people.size(), false);
+    //vector<bool> board;
+    //board.resize(people.size(), false);
 
     int left = 0;
     
-    for (int right = people.size() - 1; right >= 0; right--)
+    for (int right = people.size() - 1; right >= left; right--)
     {
-if (board[right] == true)
-    continue;
-        
-        board[right] = true;
-        answer++;
+        //if (board[right] == true)
+        //    continue;
 
-        if (left < right && people[left] + people[right] <= limit)
+        //board[right] = true;
+      
+        if (people[left] + people[right] <= limit)
         {
-            board[left] = true;
+            //board[left] = true;
             left++;
         }
+
+        answer++;
+
     }
 
     return answer;
