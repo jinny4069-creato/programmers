@@ -36,7 +36,7 @@ string Make(string skip)
     return array;
 }
 
-char ChangeWord(char word, int index, string array)
+char ChangeWord(char word, int index, const string& array)
 {
     char alphabet = '\0';
 
