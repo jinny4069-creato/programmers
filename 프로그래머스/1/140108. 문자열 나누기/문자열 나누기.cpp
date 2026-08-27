@@ -6,7 +6,7 @@ using namespace std;
 int solution(string s) {
     int answer = 0;
 
-    int start = s[0];
+    char start = s[0];
     int equal = 0;
     int unequal = 0;
     
@@ -15,13 +15,16 @@ int solution(string s) {
         if (start == s[i]) equal++;
         else unequal++;
 
-        if (i + 1 == s.size() || equal == unequal)
+        if (equal == unequal)
         {
             answer++;
             equal = 0;
             unequal = 0;
             start = s[i + 1];
         }
+        else if (i + 1 == s.size())
+            answer++;
+
     }
 
     return answer;
