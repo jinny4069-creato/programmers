@@ -1,6 +1,6 @@
 #include <string>
 #include <vector>
-
+#include <unordered_map>
 using namespace std;
 
 /* 1번 키부터 할당된 문자들이 순서대로 담긴 문자열배열 keymap 과 
@@ -11,41 +11,49 @@ using namespace std;
 *  
 */
 
-int Find(const vector<string>& keymap, char alphabet)
+unordered_map<char, int> Find(const vector<string>& keymap)
 {
-    int minimum = 999;
+    unordered_map<char, int> array;
 
     for (int i = 0; i < keymap.size(); i++)
     {
         for (int j = 0; j < keymap[i].size(); j++)
         {
-            if (alphabet == keymap[i][j])
+            auto find = array.find(keymap[i][j]);
+            if (find == array.end())
+                array[keymap[i][j]] = j;
+            else
             {
-                if (minimum > j)
-                    minimum = j;
+                if (find->second > j)
+                    array[keymap[i][j]] = j;
             }
         }
     }
-    return minimum == 999 ? -1 : minimum + 1;
+    
+    return array;
 }
 
 vector<int> solution(vector<string> keymap, vector<string> targets) {
     vector<int> answer;
+
+    unordered_map<char, int> array = Find(keymap);
 
     for (int i = 0; i < targets.size(); i++)
     {
         int count = 0;
         for (int j = 0; j < targets[i].size(); j++)
         {
-            int find = Find(keymap, targets[i][j]);
-            if (find == -1)
-{
-    count = -1;
-    break;
-}
+            auto find = array.find(targets[i][j]);
+            
+            if (find == array.end())
+            {
+                count = -1;
+                break;
+            }
             else
-                count += find;
-           
+            {
+                count += find->second + 1;
+            } 
         }
         answer.push_back(count);
     }
