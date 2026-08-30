@@ -17,31 +17,16 @@ using namespace std;
 
 int Rank(int num)
 {
-    switch (num)
-    {
-    case 0:
-        return 6;
-    case 1:
-        return 6;
-    case 2:
-        return 5;
-    case 3:
-        return 4;
-    case 4:
-        return 3;
-    case 5:
-        return 2;
-    case 6:
-        return 1;
-    }
-    return 6;
+    int rank[] = { 6, 6, 5, 4, 3, 2, 1 };
+
+    return rank[num];
 }
 
 vector<int> solution(vector<int> lottos, vector<int> win_nums) {
     vector<int> answer;
 
     int win = 0;
-    int count = 0;
+
     for (int i = 0; i < win_nums.size(); i++)
     {
         auto it = find(lottos.begin(), lottos.end(), win_nums[i]);
@@ -49,13 +34,9 @@ vector<int> solution(vector<int> lottos, vector<int> win_nums) {
             win++;
     }
 
-    for (int i = 0; i < lottos.size(); i++)
-    {
-        if (lottos[i] == 0)
-            count++;
-    }
+    int zero = count(lottos.begin(), lottos.end(), 0);
 
-    int high = Rank(win + count);
+    int high = Rank(win + zero);
     int low = Rank(win);
     
     answer.push_back(high);
