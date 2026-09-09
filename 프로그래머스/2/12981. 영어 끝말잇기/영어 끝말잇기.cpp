@@ -13,7 +13,7 @@ using namespace std;
 *  가장 먼저 탈락하는 사람의 번호와 그 사람이 자신의 몇번째에 탈락하는지 구하기
 *  1. 이중 for 문 사용 첫번째 char 하고 마지막 char 을 가져온다
 *  2. i++ 할때 마다 이전 last 문자가 현재 first 와 같은지 비교
-*  3. false 면 return 한다. words.size() / n -> 몇번째 턴 words.size() % n 는 몇번 사람인지
+*  3. false 면 return 한다. i / n -> 몇번째 턴 i % n 는 몇번 사람인지
 *  4. words for 문을 한번 더 돌려 같은 단어가 있는지 확인한다.
 */
 vector<int> solution(int n, vector<string> words) {
@@ -42,7 +42,7 @@ vector<int> solution(int n, vector<string> words) {
         
         if (wrong)
         {
-                        int turn = (i + 1) / n;
+            int turn = (i + 1) / n;
             int num = (i + 1) % n;
             if (num == 0)
                 num = n;
