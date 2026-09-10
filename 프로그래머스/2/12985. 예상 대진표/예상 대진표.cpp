@@ -21,31 +21,14 @@ int solution(int n, int a, int b)
 
     int aWin = a;
     int bWin = b;
-    for (int i = 1; i <= n / 2; i++)
+    while (aWin != bWin)
     {
-        if (abs(aWin - bWin) == 1)
-        {
-            if (aWin > bWin && aWin % 2 == 0)
-                return i;
-            else if (aWin < bWin && bWin % 2 == 0)
-                return i;
-        }
+       
 
-        if (aWin > 1 && aWin % 2 == 1)
-            aWin = aWin / 2 + 1;
-        else if (aWin > 1 && aWin % 2 == 0)
-            aWin = aWin / 2;
+        aWin = aWin / 2 + aWin % 2;
+        bWin = bWin / 2 + bWin % 2;
 
-        if (bWin > 1 && bWin % 2 == 1)
-            bWin = bWin / 2 + 1;
-        else if (bWin > 1 && bWin % 2 == 0)
-            bWin = bWin / 2;
-
-            
-        //if (aWin < 1)
-        //    aWin = 1;
-        //if (bWin < 1)
-        //    bWin = 1;
+        answer++;
     }
 
     return answer;
