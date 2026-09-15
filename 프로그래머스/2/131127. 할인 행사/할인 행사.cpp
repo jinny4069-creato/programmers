@@ -42,8 +42,6 @@ int solution(vector<string> want, vector<int> number, vector<string> discount) {
 
     while (right < discount.size())
     {
-        bool bCorrect = true;
-
         if (wish == sell)
             count++;
 
@@ -57,11 +55,7 @@ int solution(vector<string> want, vector<int> number, vector<string> discount) {
         if (right >= discount.size())
             continue;
 
-        auto product = sell.find(discount[right]);
-        if (product == sell.end())
-            sell.emplace(discount[right], 1);
-        else
-            sell[discount[right]]++;
+        sell[discount[right]]++;
     }
         
     return count;
