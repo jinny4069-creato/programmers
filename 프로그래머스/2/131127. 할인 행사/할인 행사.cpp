@@ -34,7 +34,7 @@ int solution(vector<string> want, vector<int> number, vector<string> discount) {
         wish.insert({ want[i], number[i] });
     }
 
-    while (right < discount.size())
+    for (right = 9; right < discount.size(); right++)
     {
         if (wish == sell)
             count++;
@@ -42,14 +42,13 @@ int solution(vector<string> want, vector<int> number, vector<string> discount) {
         sell[discount[left]]--;
         if (sell[discount[left]] == 0)
             sell.erase(discount[left]);
+        
+        if (right + 1 < discount.size())
+        {
+            left = right - 8;
+            sell[discount[right + 1]]++;
+        }
 
-        left++;
-        right++;
-
-        if (right >= discount.size())
-            continue;
-
-        sell[discount[right]]++;
     }
         
     return count;
