@@ -18,26 +18,20 @@ using namespace std;
 
 int solution(vector<string> want, vector<int> number, vector<string> discount) {
 
-    unordered_map<string, int> wish;
-  
-    for (int i = 0; i < want.size(); i++)
-    {
-        wish.insert({ want[i], number[i]});
-    }
-    
     int left = 0;
     int right = 9;
     int count = 0;
    
     unordered_map<string, int> sell;
-
-    for (int j = left; j <= right; j++)
+    for (int i = 0; i <= 9; i++)
     {
-        auto iter = sell.find(discount[j]);
-        if (iter != sell.end())
-            iter->second++;
-        else
-            sell.insert({ discount[j], 1 });
+        sell[discount[i]]++;
+    }
+
+    unordered_map<string, int> wish;
+    for (int i = 0; i < want.size(); i++)
+    {
+        wish.insert({ want[i], number[i] });
     }
 
     while (right < discount.size())
