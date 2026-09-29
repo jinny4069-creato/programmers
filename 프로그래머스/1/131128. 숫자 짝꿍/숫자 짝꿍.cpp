@@ -8,9 +8,9 @@ using namespace std;
 *  X, Y 의 짝꿍이 없으면 짝꿍은 -1 이다.
 *  ex) X = 3403 이고 Y = 13203 이면 X 와 Y 의 같은 숫자는 3, 0, 3
 *      이고 이거로 가장 큰 정수를 만들면 330 이다.
-*  for 문으로 공통 정수를 찾는다. 
 */
-string solution(string X, string Y) {
+string solution(string X, string Y) 
+{
     string answer = "";
     vector<pair<int, int>> matchX;
     vector<pair<int, int>> matchY;
@@ -22,24 +22,16 @@ string solution(string X, string Y) {
         matchY.push_back({ i, 0 });
     }
 
-    for (int i = 0; i < matchX.size(); i++)
+    for (int i = 0; i < X.size(); i++)
     {
-        for (int j = 0; j < X.size(); j++)
-        {
-            if (matchX[i].first == X[j] - 48)
-            {
-                matchX[i].second++;
-            }
-        }
+        int num = X[i] - 48;
+        matchX[num].second++;
     }
 
-    for (int i = 0; i < matchY.size(); i++)
+    for (int i = 0; i < Y.size(); i++)
     {
-        for (int j = 0; j < Y.size(); j++)
-        {
-            if (matchY[i].first == (Y[j] - 48))
-                matchY[i].second++;
-        }
+        int num = Y[i] - 48;
+        matchY[num].second++;
     }
 
     for (int i = 0; i < matchX.size(); i++)
