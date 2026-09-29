@@ -9,42 +9,35 @@ using namespace std;
 *  ex) X = 3403 이고 Y = 13203 이면 X 와 Y 의 같은 숫자는 3, 0, 3
 *      이고 이거로 가장 큰 정수를 만들면 330 이다.
 */
-string solution(string X, string Y) 
-{
+string solution(string X, string Y) {
     string answer = "";
-    vector<pair<int, int>> matchX;
-    vector<pair<int, int>> matchY;
+    int matchX[10] = { 0 };
+    int matchY[10] = { 0 };
     vector<int> mates;
-
-    for (int i = 0; i <= 9; i++)
-    {
-        matchX.push_back({ i, 0 });
-        matchY.push_back({ i, 0 });
-    }
 
     for (int i = 0; i < X.size(); i++)
     {
         int num = X[i] - 48;
-        matchX[num].second++;
+        matchX[num]++;
     }
 
     for (int i = 0; i < Y.size(); i++)
     {
         int num = Y[i] - 48;
-        matchY[num].second++;
+        matchY[num]++;
     }
 
-    for (int i = 0; i < matchX.size(); i++)
+    for (int i = 9; i >= 0; i--)
     {
-        if (matchX[i].second == 0 || matchY[i].second == 0)
+        if (matchX[i] == 0 || matchY[i] == 0)
         {
             continue;
         }
 
-        int count = min(matchX[i].second, matchY[i].second);
+        int count = min(matchX[i], matchY[i]);
         for (int j = 1; j <= count; j++)
         {
-            mates.push_back(matchX[i].first);
+            mates.push_back(i);
         }
     }
 
@@ -53,8 +46,6 @@ string solution(string X, string Y)
         return answer = "-1";
     }
 
-    sort(mates.begin(), mates.end(), greater<>());
-    
     if (mates[0] == 0)
     {
         return answer = "0";
