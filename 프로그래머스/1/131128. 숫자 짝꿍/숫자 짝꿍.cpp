@@ -8,6 +8,7 @@ using namespace std;
 *  X, Y 의 짝꿍이 없으면 짝꿍은 -1 이다.
 *  ex) X = 3403 이고 Y = 13203 이면 X 와 Y 의 같은 숫자는 3, 0, 3
 *      이고 이거로 가장 큰 정수를 만들면 330 이다.
+*  for 문으로 공통 정수를 찾는다. 
 */
 string solution(string X, string Y) {
     string answer = "";
@@ -35,25 +36,18 @@ string solution(string X, string Y) {
         }
 
         int count = min(matchX[i], matchY[i]);
-        for (int j = 1; j <= count; j++)
-        {
-            mates.push_back(i);
-        }
+
+        answer.append(count, i + '0');
     }
 
-    if (mates.empty())
+    if (answer.empty())
     {
         return answer = "-1";
     }
 
-    if (mates[0] == 0)
+    if (answer[0] == '0')
     {
         return answer = "0";
-    }
-
-    for (int i = 0; i < mates.size(); i++)
-    {
-        answer += to_string(mates[i]);
     }
     return answer;
 }
