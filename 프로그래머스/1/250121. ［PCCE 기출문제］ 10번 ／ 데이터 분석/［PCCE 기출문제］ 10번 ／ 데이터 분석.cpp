@@ -46,21 +46,24 @@ vector<vector<int>> solution(vector<vector<int>> data, string ext, int val_ext, 
         }
     }
     
-    int com = answer[0][iSort];
-    int num = 0;
-    for (int i = 0; i < answer.size(); i++)
-    {
-        if (i > num)
+    sort(answer.begin(), answer.end(), [iSort](const auto& a, const auto& b) 
         {
-            if (answer[i][iSort] < com)
-            {
-                swap(answer[i], answer[num]);
-                i = 0;
-            }
-        }
-        com = answer[i][iSort];
-        num = i;
-    }
-
-    return answer;
+            return a[iSort] < b[iSort]; 
+        });
+    //int com = answer[0][iSort];
+    //int num = 0;
+    //for (int i = 0; i < answer.size(); i++)
+    //{
+    //    if (i > num)
+    //    {
+    //        if (answer[i][iSort] < com)
+    //        {
+    //            swap(answer[i], answer[num]);
+    //            i = 0;
+    //        }
+    //    }
+    //    com = answer[i][iSort];
+    //    num = i;
+    
+       return answer;
 }
