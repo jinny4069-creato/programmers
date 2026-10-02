@@ -14,35 +14,39 @@ using namespace std;
 *  stack 에 push 하고 해당 행은 가져온 값을 0으로 만든다.
 *  
 */
+
 int solution(vector<vector<int>> board, vector<int> moves) {
     int answer = 0;
     stack<int> gets;
 
     for (int i = 0; i < moves.size(); i++)
     {
+        int num1 = 0;
+        int num2 = 0;
+
+        int col = moves[i] - 1;
         for (int j = 0; j < board.size(); j++)
         {
-            int num1 = 0;
-            int num2 = 0;
-
             if (!gets.empty())
             {
                 num1 = gets.top();
             }
 
-            int get = board[j][moves[i] - 1];
+            int get = board[j][col];
 
             if (get != 0)
             {
-                gets.push(get);
+                num2 = get;
                 board[j][moves[i] - 1] = 0;
-                num2 = gets.top();
 
                 if (num1 != 0 && num1 == num2)
                 {
                     gets.pop();
-                    gets.pop();
                     answer += 2;
+                }
+                else
+                {
+                    gets.push(num2);
                 }
                 break;
             }
