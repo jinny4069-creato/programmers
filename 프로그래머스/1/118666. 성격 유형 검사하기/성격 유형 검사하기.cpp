@@ -1,5 +1,6 @@
 #include <string>
 #include <vector>
+#include <map>
 using namespace std;
 
 /*  성격유형검사
@@ -23,96 +24,29 @@ using namespace std;
 */
 string solution(vector<string> survey, vector<int> choices) {
     string answer = "";
-    vector<pair<char, int>> results;
+    //vector<pair<char, int>> results;
     vector<string> indicator{ "RT", "CF", "JM", "AN"};
-
+    map<char, int> score;
     // 점수가 있고 survey 별 점수를 types 에 저장한 거 에서 가져와서
     // 점수 로 어떤 값이 더 큰지 비교해서 내보낼 유형을 정해야 한다.
 
     for (int i = 0; i < survey.size(); i++)
     {
-        int score = 0;
-        char type = '\0';
-        
-        score = choices[i] - 4;
-
-        if (score > 0)
+        if (choices[i] > 4)
         {
-            type = survey[i][1];
+            score[survey[i][1]] += choices[i] - 4;
         }
         else
         {
-            type = survey[i][0];
+            score[survey[i][0]] += 4 - choices[i];
         }
-        results.push_back({ type, score });
     }
 
     // 점수 계산을 해야한다. 같은 유형의 값들이 있는지 확인
     // 있으면 - 해서 결과값 기준으로 정해햐 한다.
-    // - ~ 0 까지 0 번째    + 면 1번째 로 바꾸기
-    for (int i = 0; i < results.size(); i++)
+    for (int i = 0; i < indicator.size(); i++)
     {
-        for (int j = 0; j < indicator.size(); j++)
-        {
-            if (indicator[j][0] == results[i].first)
-            {
-                if (results[i].second > 0)
-                {
-                    results[i].second = -(results[i].second);
-                }
-                break;
-            }
-            else if (indicator[j][1] == results[i].first)
-            {
-                if (results[i].second <= 0)
-                {
-                    results[i].second = -(results[i].second);
-                }
-                break;
-            }
-        }
-    }
-
-
-    // char 별 점수가 나왔으니 이걸 indicator 와 비교해서 정해야 한다.
-    // 예를 들어 C -2 , F 1 이 있는데 indicator for 문 돌려 문자 찾기
-    // 만약 -1 점이면 CF 에서 C 이어야 하니까 [0] 은 - ~ 0 까지 [1] 은 123 까지
-    vector<int> types;
-    types.resize(4, -100);
-    for (int i = 0; i < results.size(); i++)
-    {
-        for (int j = 0; j < indicator.size(); j++)
-        {
-            if (results[i].first == indicator[j][0])
-            {
-                if (types[j] == -100)
-                {
-                    types[j] = results[i].second;       // 음수
-                }
-                else
-                {
-                    types[j] += results[i].second;
-                }
-                break;
-            }
-            else if (results[i].first == indicator[j][1])
-            {
-                if (types[j] == -100)
-                {
-                    types[j] = results[i].second;       // 양수
-                }
-                else
-                {
-                    types[j] += results[i].second;
-                }
-                break;
-            }
-        }   
-    }
-
-    for (int i = 0; i < types.size(); i++)
-    {
-        if (types[i] <= 0)
+        if (score[indicator[i][0]] >= score[indicator[i][1]])
         {
             answer += indicator[i][0];
         }
@@ -121,6 +55,7 @@ string solution(vector<string> survey, vector<int> choices) {
             answer += indicator[i][1];
         }
     }
+
   
     return answer;
 }
