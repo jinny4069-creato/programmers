@@ -18,16 +18,11 @@ using namespace std;
 vector<int> solution(vector<string> wallpaper) {
     vector<int> answer;
 
-    int minR = wallpaper.size();
-    int minC = wallpaper[0].size();
-    int maxR = 0;
-    int maxC = 0;
-
-    int lux = 0;
-    int luy = 0;
+    int lux = wallpaper.size();
+    int luy = wallpaper[0].size();
     int rdx = 0;
     int rdy = 0;
-    
+
     for (int i = 0; i < wallpaper.size(); i++)
     {
         for (int j = 0; j < wallpaper[i].size(); j++)
@@ -36,31 +31,31 @@ vector<int> solution(vector<string> wallpaper) {
                 int a = 10;
             if (wallpaper[i][j] == '#')
             {
-                if (i < minR )
+                if (i < lux )
                 {
-                    minR = i;
+                    lux = i;
                 }
-                if (i > maxR)
+                if (i > rdx)
                 {
-                    maxR = i;
+                    rdx = i;
                 }
-                if (j < minC)
+                if (j < luy)
                 {
-                    minC = j;
+                    luy = j;
                 }
-                if (j > maxC)
+                if (j > rdy)
                 {
-                    maxC = j;
+                    rdy = j;
                 }
             }
         }
     }
 
     // 행에서 최소 & 최대 열에서 최소 & 최대 인 # 4개를 구해야한다
-    answer.push_back(minR);
-    answer.push_back(minC);
-    answer.push_back(maxR + 1);
-    answer.push_back(maxC + 1);
+    answer.push_back(lux);
+    answer.push_back(luy);
+    answer.push_back(rdx + 1);
+    answer.push_back(rdy + 1);
 
     return answer;
 }
