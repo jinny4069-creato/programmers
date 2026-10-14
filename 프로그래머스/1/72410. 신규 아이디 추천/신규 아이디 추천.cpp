@@ -61,21 +61,21 @@ string step_two(string new_id)
 string step_three(string new_id)
 {
     string three = "";
-    int dot = -1;
+    bool bDot = false;
     for (int i = 0; i < new_id.size(); i++)
     {
         if (new_id[i] == '.')
         {
-            if (dot == -1 && !three.empty())
+            if (!bDot && !three.empty())
             {
                 three += new_id[i];
-                dot = i;
+                bDot = true;
             }
         }
         else
         {
             three += new_id[i];
-            dot = -1;
+            bDot = false;
         }
     }
     
@@ -98,17 +98,18 @@ string step_four(string new_id)
 
 string step_five(string new_id)
 {
-    string five = "";
+    //string five = "";
 
-    for (int i = 0; i < new_id.size(); i++)
-    {
-        if (i < 15)
-        {
-            five += new_id[i];
-        }
-    }
+    new_id = new_id.substr(0, 15);
+    //for (int i = 0; i < new_id.size(); i++)
+    //{
+    //    if (i < 15)
+    //    {
+    //        five += new_id[i];
+    //    }
+    //}
    
-    return five;
+    return new_id;
 }
 
 string step_six(string new_id)
