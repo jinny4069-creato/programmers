@@ -39,17 +39,11 @@ int solution(vector<int> schedules, vector<vector<int>> timelogs, int startday) 
         bool bSuccess = true;
         int limit = TimeCalcul(schedules[i]);
         
-        int day = startday;
         for (int j = 0; j < timelogs[i].size(); j++)
         {
-            int num = day - 7;
-            if (num > 0)
-            {
-                day = day - 7;
-            }
+            int day = (startday - 1 + j) % 7 + 1;
             if (day > 5)
             {
-                day++;
                 continue;
             }
             if (timelogs[i][j] > limit)
@@ -57,7 +51,6 @@ int solution(vector<int> schedules, vector<vector<int>> timelogs, int startday) 
                 bSuccess = false;
                 break;
             }
-            day++;
         }
         if (bSuccess)
         {
