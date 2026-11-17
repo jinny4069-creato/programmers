@@ -1,19 +1,19 @@
-using namespace std;
+#include <stdio.h>
+#include <stdbool.h>
+#include <stdlib.h>
 
-long long solution(int price, int money, int count)
-{
+long long solution(int price, int money, int count) {
     long long answer = -1;
     long long total = 0;
     for (int i = 1; i <= count; i++)
     {
-        long long num1 = price * i;
-        total += num1;
+        total += price * i;
     }
-    long long num2 = total - money;
-    if (num2 > 0)
-        answer = num2;
-    else
-        answer = 0;
 
-    return answer;
+    long long gap = total - money;
+    
+    if (gap < 0)
+        return 0;
+
+    return  gap;
 }
